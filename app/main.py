@@ -10,6 +10,11 @@ from app.services.market_data import market_service
 from app.services.analysis import AnalysisService
 from app.models.schemas import AnalysisResponse
 
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+# ... (imports remain)
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
@@ -21,7 +26,15 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
 
+# Mount Static Files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 @app.get("/")
+async def read_root():
+    """Serve the Web UI."""
+    return FileResponse('static/index.html')
+
+@app.get("/health")
 def health_check():
     """Health check endpoint."""
     return {"status": "active", "version": settings.VERSION}

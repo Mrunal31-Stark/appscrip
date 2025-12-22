@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Market Analyst</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="glass-container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-chart-line"></i>
+                <h1>Appscrip<span class="highlight">Analyzer</span></h1>
+            </div>
+            <p>AI-Powered Market Intelligence & Trade Opportunities</p>
+        </header>
+
+        <main>
+            <div class="input-group">
+                <div class="field">
+                    <label>Target Sector</label>
+                    <input type="text" id="sectorInput" placeholder="e.g., Renewable Energy, Crypto, Pharma"
+                        autocomplete="off">
+                </div>
+                <div class="field">
+                    <label>Access Key</label>
+                    <input type="password" id="apiKeyInput" placeholder="Enter API Secret Key">
+                </div>
+            </div>
+
+            <button id="analyzeBtn" onclick="analyzeMarket()">
+                <span class="btn-text">Generic Analysis</span>
+                <span class="loader"></span>
+            </button>
+
+            <div id="statusMessage" class="status hidden"></div>
+
+            <div id="resultContainer" class="hidden">
+                <div class="result-header">
+                    <h2>Analysis Report</h2>
+                    <button class="download-btn" onclick="downloadReport()">
+                        <i class="fa-solid fa-download"></i> Download .md
+                    </button>
+                </div>
+                <div class="report-content" id="reportContent">
+                    <!-- Markdown content will appear here -->
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Google Gemini 2.5 Flash & DuckDuckGo</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
