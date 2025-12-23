@@ -67,15 +67,19 @@ async def analyze_sector(
         print(f"Analyzing data with Gemini...")
         report_markdown = await analysis_service.analyze_market_opportunities(sector, market_data)
         
-        # Step 3: Save to File
+        # Step 3: Save to File (Local Dev Only)
         # Sanitize sector name for filename (remove spaces, special chars)
         safe_sector_name = "".join(c for c in sector if c.isalnum() or c in (' ', '-', '_')).strip().replace(' ', '_')
         file_path = f"market_analysis_{safe_sector_name}.md"
         
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(report_markdown)
-        print(f"Report saved to {file_path}")
-        
+        try:
+            with open(file_path, "w", encoding="utf-8") as f:
+                f.write(report_markdown)
+            print(f"Report saved to {file_path}")
+        except OSError:
+            # Vercel/Serverless environments are Read-Only.
+            print("Skipped saving file (Read-Only File System detected).")
+
         return AnalysisResponse(
             sector=sector,
             report_markdown=report_markdown
