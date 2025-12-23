@@ -9,8 +9,8 @@ class Settings:
     VERSION: str = "1.0.0"
     
     # API Keys
-    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "AIzaSyDydj9YjJyx42awY-G59kOz2_wd4JXjRbs")
-    API_SECRET_KEY: str = os.getenv("API_SECRET_KEY", "default-secret-key")
+    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    API_SECRET_KEY: str = os.getenv("API_SECRET_KEY", "")
     
     if not GEMINI_API_KEY:
         print("WARNING: GEMINI_API_KEY not found in .env file. AI analysis will fail.")
